@@ -32,6 +32,7 @@ export const serverOn = (port = 3000) => {
   const app = express();
 
   app.use("/", homeRoute);
+  app.set('view engine', 'ejs');
   app.use(express.urlencoded({ extended : true }));
 
   app.use(express.static('views'));
