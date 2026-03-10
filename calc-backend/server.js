@@ -1,5 +1,7 @@
 import express from "express";
 
+import homeRoute from "./routes/homeRoute.js"
+
 import add from "./routes/add.js";
 import subtract from "./routes/subtract.js";
 import divide from "./routes/div.js";
@@ -19,17 +21,26 @@ import arcsin from "./routes/arcsin.js";
 import arccos from "./routes/arccos.js";
 import arctan from "./routes/arctan.js";
 import rnd from "./routes/rnd.js";
+import notFound from "./routes/invalidPaths.js";
+import customError from "./routes/customError.js"
 
+import { errorHandler } from "./middleware/error.js";
 import { logger } from "./middleware/logger.js";
 import { controlAccess } from "./middleware/access.js";
 
 export const serverOn = (port = 3000) => {
   const app = express();
 
+  app.use("/", homeRoute);
+  app.use(express.urlencoded({ extended : true }));
+
+  app.use(express.static('views'));
+
+  app.use("/error", customError);
   app.use(express.json());
   app.use(logger);
-
   app.use(controlAccess);
+  
   app.use("/add", add);
   app.use("/subtract", subtract);
   app.use("/divide", divide);
@@ -49,20 +60,9 @@ export const serverOn = (port = 3000) => {
   app.use("/arccos", arccos);
   app.use("/arctan", arctan);
   app.use("/rnd", rnd);
-
-  app.get("/", (req, res) => {
-    res.send(`
-        <div style="background-color: #1e1e1e; 
-                padding: 20px; 
-                border-radius: 8px; 
-                display: inline-block;">
-          <code style="color: #4af626; 
-                      font-family: 'Courier New', Courier, monospace; 
-                      font-size: 1.5rem;">
-              > Welcome to our calculator API_
-          </code>
-        </div>`);
-  });
+  
+  app.use(errorHandler);
+  app.use("/", notFound);
 
   app.listen(port, () => {
     console.log(`Calculator API running on http://localhost:${port}`);
