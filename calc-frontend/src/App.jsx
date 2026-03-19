@@ -205,25 +205,28 @@ function App() {
     playClick()
     const n = parseFloat(display.replace(/,/g, ''))
     let endpoint = ''
+    let params = {}
     const unit = isDeg ? 'deg' : 'rad'
+
     switch (func) {
-      case 'sin': endpoint = `sin/${n}?unit=${unit}`; break;
-      case 'cos': endpoint = `cos/${n}?unit=${unit}`; break;
-      case 'tan': endpoint = `tan/${n}?unit=${unit}`; break;
-      case 'n!': endpoint = `factorial/${n}`; break;
-      case 'sqrt': endpoint = `sqrt/${n}`; break;
-      case 'ln': endpoint = `ln/${n}`; break;
-      case 'log': endpoint = `log/${n}`; break;
-      case 'inv': endpoint = `inv/${n}`; break;
-      case 'arcsin': endpoint = `arcsin/${n}?unit=${unit}`; break;
-      case 'arccos': endpoint = `arccos/${n}?unit=${unit}`; break;
-      case 'arctan': endpoint = `arctan/${n}?unit=${unit}`; break;
+      case 'sin': endpoint = `sin/${n}`; params = { unit }; break;
+      case 'cos': endpoint = `cos/${n}`; params = { unit }; break;
+      case 'tan': endpoint = `tan/${n}`; params = { unit }; break;
+      case 'n!': endpoint = `factorial`; params = { a: n, b: 0 }; break;
+      case 'sqrt': endpoint = `sqrt`; params = { a: n, b: 0 }; break;
+      case 'ln': endpoint = `ln`; params = { a: n, b: 0 }; break;
+      case 'log': endpoint = `log`; params = { a: n, b: 0 }; break;
+      case 'inv': endpoint = `inv`; params = { a: n, b: 0 }; break;
+      case 'arcsin': endpoint = `arcsin/${n}`; params = { unit }; break;
+      case 'arccos': endpoint = `arccos/${n}`; params = { unit }; break;
+      case 'arctan': endpoint = `arctan/${n}`; params = { unit }; break;
+      case 'rnd': endpoint = `rnd`; params = { a: n, b: 0 }; break; // Assuming rnd used like others
       default: return;
     }
 
     try {
-      const response = await axios.get(`${API_BASE}/${endpoint}`)
-      const result = response.data.result
+      const response = await axios.get(`${API_BASE}/${endpoint}`, { params })
+      const result = response.data.Result || response.data.result
       setDisplay(result.toString())
       setOperation(`${func}(${formatDisplay(n)}) =`)
       setAns(result)
@@ -233,7 +236,7 @@ function App() {
       setDisplay('Error')
       setIsNewInput(true)
     }
-  }, [display, fetchHistory, playClick])
+  }, [display, isDeg, fetchHistory, playClick])
 
   const handleConstant = (type) => {
     playClick()
@@ -246,22 +249,75 @@ function App() {
     playClick()
 
     let ansValue = ans;
-    if (history.length > 0) {
+    // Check if we have a real value in ans, otherwise fallback to history
+    if (ansValue === 0 && history.length > 0) {
       const lastEntry = history[history.length - 1];
-      ansValue = lastEntry.Result || lastEntry.Outcome || lastEntry.outcome || ansValue;
+      ansValue = lastEntry.Result || lastEntry.Outcome || lastEntry.outcome || 0;
     }
 
     setDisplay(ansValue.toString())
     setIsNewInput(false)
   }, [ans, history, playClick])
 
+  const handleParenthesis = useCallback((p) => {
+    playClick()
+    setDisplay(prev => {
+      if (isNewInput || prev === '0') {
+        setIsNewInput(false)
+        return p
+      }
+      return prev + p
+    })
+  }, [isNewInput, playClick])
+
   const handleRan = useCallback(async () => {
     playClick()
     try {
-      const response = await axios.get(`${API_BASE}/ran`)
-      const result = response.data.result
+      const response = await axios.get(`${API_BASE}/ran`, { params: { a: 0, b: 0 } })
+      const result = response.data.Result || response.data.result
       setDisplay(result.toString())
       setOperation('Ran =')
+      setAns(result)
+      setIsNewInput(true)
+      fetchHistory()
+    } catch (error) {
+      setDisplay('Error')
+      setIsNewInput(true)
+    }
+  }, [fetchHistory, playClick])
+
+  const handlePercent = useCallback(() => {
+    playClick()
+    setDisplay(prev => {
+      const val = parseFloat(prev.replace(/,/g, ''))
+      const result = val / 100
+      setAns(result)
+      return result.toString()
+    })
+    setIsNewInput(true)
+  }, [playClick])
+
+  const handleEXP = useCallback(() => {
+    playClick()
+    setDisplay(prev => {
+      if (prev.includes('e')) return prev
+      return prev + 'e'
+    })
+    setIsNewInput(false)
+  }, [playClick])
+
+  const handleSumArray = useCallback(async () => {
+    playClick()
+    const input = prompt("Enter numbers separated by commas (e.g., 1,2,3):")
+    if (!input) return
+    const nums = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n))
+    if (nums.length === 0) return
+
+    try {
+      const response = await axios.post(`${API_BASE}/sumarray`, { a: nums }, { params: { a: 0, b: 0 } }) // Dummy params to pass validator if needed
+      const result = response.data.Result || response.data.result
+      setDisplay(result.toString())
+      setOperation(`sum([${nums.join(', ')}]) =`)
       setAns(result)
       setIsNewInput(true)
       fetchHistory()
@@ -420,9 +476,9 @@ function App() {
             </button>
           </div>
           <button onClick={() => handleScientific('n!')} className={getButtonClass('x!', 'operator')}>x!</button>
-          <button onClick={() => playClick()} className={getButtonClass('(', 'operator')}>(</button>
-          <button onClick={() => playClick()} className={getButtonClass(')', 'operator')}>)</button>
-          <button onClick={() => playClick()} className={getButtonClass('%', 'operator')}>%</button>
+          <button onClick={isShift ? handleSumArray : () => handleParenthesis('(')} className={getButtonClass('(', 'operator')}>{isShift ? 'Σ' : '('}</button>
+          <button onClick={() => handleParenthesis(')')} className={getButtonClass(')', 'operator')}>)</button>
+          <button onClick={handlePercent} className={getButtonClass('%', 'operator')}>%</button>
           <button onClick={handleClear} className={getButtonClass('clear', 'operator')}>AC</button>
 
           <button onClick={() => handleScientific('inv')} className={getButtonClass('Inv', 'operator')}>Inv</button>
@@ -450,11 +506,11 @@ function App() {
           <button onClick={() => handleOperator('-')} className={getButtonClass('-', 'operator') + " text-2xl"}>−</button>
 
           {isShift ? (
-            <button onClick={HandleRan} className={getButtonClass('Rnd', 'operator')}>Rnd</button>
+            <button onClick={() => handleScientific('rnd')} className={getButtonClass('Rnd', 'operator')}>Rnd</button>
           ) : (
             <button onClick={handleAns} className={getButtonClass('Ans', 'operator')}>Ans</button>
           )}
-          <button onClick={() => playClick()} className={getButtonClass('EXP', 'operator')}>EXP</button>
+          <button onClick={isShift ? handleRan : handleEXP} className={getButtonClass('EXP', 'operator')}>{isShift ? 'Ran' : 'EXP'}</button>
           <button onClick={() => handleOperator('^')} className={getButtonClass('xy', 'operator')}>x<sup>y</sup></button>
           <button onClick={() => handleNumber(0)} className={getButtonClass('0', 'number')}>0</button>
           <button onClick={handleDecimal} className={getButtonClass('.', 'number')}>.</button>
