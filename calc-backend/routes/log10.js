@@ -1,34 +1,10 @@
 import express from "express";
-import { addHistory } from "../middleware/history.js";
+import { validateNums } from "../middleware/validator.js";
+import { log10 } from "../controllers/calculator.controller.js";
 
 const router = express.Router();
 
-router.get("/:n", (req, res) => {
-    const n = Number(req.params.n);
-    if (isNaN(n) || n <= 0) {
-        return res.status(400).json({
-            error: "Invalid input!"
-        });
-    }
-
-    const result = Math.log10(n);
-
-    addHistory({ Operation: "Logarithm (Base 10)", Operands: [n], Result: result });
-    res.json({ result: result });
-});
-
-router.post("/:n", (req, res) => {
-    const n = Number(req.params.n);
-    if (isNaN(n) || n <= 0) {
-        return res.status(400).json({
-            error: "Invalid input!"
-        });
-    }
-
-    const result = Math.log10(n);
-
-    addHistory({ Operation: "Logarithm (Base 10)", Operands: [n], Result: result });
-    res.json({ result: result });
-});
+router.get("/", validateNums, log10);
+router.post("/", validateNums, log10);
 
 export default router;

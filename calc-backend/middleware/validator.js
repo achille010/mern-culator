@@ -1,5 +1,5 @@
 export const validateNums = (req, res, next) => {
-  let a = req.query.a ?? req.body.a;
+  let a = req.query.a ?? req.body.a ?? req.params.n;
   let b = req.query.b ?? req.body.b;
 
   a = Number(a);
@@ -12,3 +12,16 @@ export const validateNums = (req, res, next) => {
   req.numbers = { a, b };
   next();
 };
+
+export const validateNum = (req, res, next) => {
+  let a = req.query.a ?? req.body.a ?? req.params.n;
+
+  a = Number(a);
+
+  if(isNaN(a)){
+    return res.status(400).json({error : "Invalid Input"});
+  }
+
+  req.numbers = { a };
+  next();
+}

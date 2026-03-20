@@ -255,13 +255,13 @@ function App() {
     setIsNewInput(false)
   }, [ans, history, playClick])
 
-  const handleRnd = useCallback(async () => {
+  const handleRan = useCallback(async () => {
     playClick()
     try {
-      const response = await axios.get(`${API_BASE}/rnd`)
+      const response = await axios.get(`${API_BASE}/ran`)
       const result = response.data.result
       setDisplay(result.toString())
-      setOperation('Rnd =')
+      setOperation('Ran =')
       setAns(result)
       setIsNewInput(true)
       fetchHistory()
@@ -450,7 +450,7 @@ function App() {
           <button onClick={() => handleOperator('-')} className={getButtonClass('-', 'operator') + " text-2xl"}>−</button>
 
           {isShift ? (
-            <button onClick={handleRnd} className={getButtonClass('Rnd', 'operator')}>Rnd</button>
+            <button onClick={HandleRan} className={getButtonClass('Rnd', 'operator')}>Rnd</button>
           ) : (
             <button onClick={handleAns} className={getButtonClass('Ans', 'operator')}>Ans</button>
           )}
