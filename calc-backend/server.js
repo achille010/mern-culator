@@ -20,9 +20,8 @@ import inv from "./routes/inv.js";
 import arcsin from "./routes/arcsin.js";
 import arccos from "./routes/arccos.js";
 import arctan from "./routes/arctan.js";
-import rnd from "./routes/rnd.js";
+import ran from "./routes/ran.js";
 import notFound from "./routes/invalidPaths.js";
-import customError from "./routes/customError.js"
 
 import { errorHandler } from "./middleware/error.js";
 import { logger } from "./middleware/logger.js";
@@ -32,12 +31,10 @@ export const serverOn = (port = 3000) => {
   const app = express();
 
   app.use("/", homeRoute);
-  app.set('view engine', 'ejs');
   app.use(express.urlencoded({ extended : true }));
 
   app.use(express.static('views'));
 
-  app.use("/error", customError);
   app.use(express.json());
   app.use(logger);
   app.use(controlAccess);
@@ -60,7 +57,7 @@ export const serverOn = (port = 3000) => {
   app.use("/arcsin", arcsin);
   app.use("/arccos", arccos);
   app.use("/arctan", arctan);
-  app.use("/rnd", rnd);
+  app.use("/ran", ran);
   
   app.use(errorHandler);
   app.use("/", notFound);

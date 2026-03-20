@@ -1,23 +1,10 @@
 import express from "express";
-import { addHistory } from "../middleware/history.js";
-import { validateNums } from "../middleware/validator.js";
+import { validateNum } from "../middleware/validator.js";
+import { div } from "../controllers/calculator.controller.js";
 
 const router = express.Router();
 
-router.get("/", validateNums, (req, res) => {
-  const { a, b } = req.numbers;
-  if (b === 0) return res.json({ error: "The divisor can't be zero" });
-  const result = a / b;
-  addHistory({ Operation: "Division", Operands: [a, b], Result: result });
-  res.json({ result });
-});
-
-router.post("/", validateNums, (req, res) => {
-  const { a, b } = req.numbers;
-  if (b === 0) return res.json({ error: "The divisor can't be zero" });
-  const result = a / b;
-  addHistory({ Operation: "Division", Operands: [a, b], Result: result });
-  res.json({ result });
-});
+router.get("/", validateNum, div);
+router.post("/", validateNum, div);
 
 export default router;

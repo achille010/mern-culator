@@ -1,16 +1,10 @@
 import express from "express";
-import { addHistory } from "../middleware/history.js";
+import { validateNums } from "../middleware/validator.js";
+import { rnd } from "../controllers/calculator.controller.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const result = Math.random();
-  addHistory({
-    Operation: "Rnd",
-    Operands: [],
-    Result: result,
-  });
-  res.json({ result: result });
-});
+router.get("/", validateNums, rnd);
+router.post("/", validateNums, rnd);
 
 export default router;

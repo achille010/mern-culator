@@ -1,21 +1,10 @@
 import express from "express";
-import { addHistory } from "../middleware/history.js";
 import { validateNums } from "../middleware/validator.js";
+import { add } from "../controllers/calculator.controller.js";
 
 const router = express.Router();
 
-router.get("/", validateNums, (req, res) => {
-  const { a, b } = req.numbers;
-  const result = a + b;
-  addHistory({ Operation: "Addition", Operands: [a, b], Result: result });
-  res.json({ result });
-});
-
-router.post("/", validateNums, (req, res) => {
-  const { a, b } = req.numbers;
-  const result = a + b;
-  addHistory({ Operation: "Addition", Operands: [a, b], Result: result });
-  res.json({ result });
-});
+router.get("/", validateNums, add);
+router.post("/", validateNums, add);
 
 export default router;

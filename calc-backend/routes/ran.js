@@ -1,10 +1,10 @@
 import express from "express";
+import { ran } from "../controllers/calculator.controller.js";
 import { validateNums } from "../middleware/validator.js";
-import { power } from "../controllers/calculator.controller.js";
 
 const router = express.Router();
 
-router.get("/", validateNums, power);
-router.post("/", validateNums, power);
+router.get("/", validateNums, ran);
+router.post("/", validateNums, ran);
 
 export default router;
