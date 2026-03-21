@@ -45,8 +45,8 @@ export const rnd = (a) => {
 export const ran = () => {
   return Math.floor(Math.random()*1000);
 };
-export const sine = (deg) => {
-  return Math.sin(deg);
+export const sine = (a) => {
+  return Math.sin(a);
 };
 export const squareRoot = (a) => {
   return Math.sqrt(a);
