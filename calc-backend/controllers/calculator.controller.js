@@ -141,3 +141,4 @@ export const tangent = handle("Tangent", (req) => {
 <!-- fix: arc functions now convert output not input -->
 <!-- fix: trig functions now correctly convert input to rad -->
 <!-- fix: summarray reads from req.numbers consistently -->
+<!-- chore: mark ran() req param as unused with _req -->
