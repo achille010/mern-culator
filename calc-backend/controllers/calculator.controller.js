@@ -137,3 +137,4 @@ export const tangent = handle("Tangent", (req) => {
   return Calc.tangent(val);
 });
 <!-- refactor: extract toRad utility in controller -->
+<!-- refactor: extract fromRad utility in controller -->
