@@ -139,3 +139,4 @@ export const tangent = handle("Tangent", (req) => {
 <!-- refactor: extract toRad utility in controller -->
 <!-- refactor: extract fromRad utility in controller -->
 <!-- fix: arc functions now convert output not input -->
+<!-- fix: trig functions now correctly convert input to rad -->
