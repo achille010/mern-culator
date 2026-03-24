@@ -20,5 +20,8 @@
   "homepage": "https://github.com/achille010/calculator-api#readme",
   "dependencies": {
     "calculator-api-express": "^1.6.0"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
   }
 }

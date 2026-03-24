@@ -146,7 +146,7 @@ function App() {
 
     try {
       const response = await axios.get(`${API_BASE}/${endpoint}`, { params: { a, b } })
-      const result = response.data.result
+      const result = response.data.Result !== undefined ? response.data.Result : response.data.result
       setDisplay(result.toString())
       setOperation(`${formatDisplay(a)} ${op} ${formatDisplay(b)} =`)
       setPreviousValue(result)

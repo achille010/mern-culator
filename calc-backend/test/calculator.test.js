@@ -35,3 +35,4 @@ describe("multiply", () => {
     expect(Calc.multi(2.123, 123)).toBeCloseTo(261.129, 5));
 });
 
+describe
