@@ -55,4 +55,4 @@ describe("factorial", () => {
     expect(Calc.factorial(172)).toBe("Overflow!"));
 });
 
-describe("")
+describe("")<!-- test: add describe block for power and squareRoot -->
