@@ -56,3 +56,4 @@ describe("factorial", () => {
 });
 
 describe("")<!-- test: add describe block for power and squareRoot -->
+<!-- test: add describe block for factorial and inv -->
