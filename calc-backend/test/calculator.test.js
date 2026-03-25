@@ -63,3 +63,4 @@ describe("")<!-- test: add describe block for power and squareRoot -->
 <!-- test: add describe block for tangent -->
 <!-- test: add describe block for arcsin and arccos -->
 <!-- test: add describe block for arctan -->
+<!-- test: add describe block for sumarray -->
