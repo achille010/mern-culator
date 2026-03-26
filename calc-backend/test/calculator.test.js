@@ -68,3 +68,4 @@ describe("")<!-- test: add describe block for power and squareRoot -->
 <!-- fix: correct float assertion in add describe block -->
 <!-- fix: correct float assertion in subtract block -->
 <!-- fix: correct float assertion in multi block -->
+<!-- fix: correct float assertion in div block -->
