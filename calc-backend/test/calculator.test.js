@@ -66,3 +66,4 @@ describe("")<!-- test: add describe block for power and squareRoot -->
 <!-- test: add describe block for sumarray -->
 <!-- fix: replace toBe with toBeCloseTo for float tests -->
 <!-- fix: correct float assertion in add describe block -->
+<!-- fix: correct float assertion in subtract block -->
