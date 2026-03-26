@@ -70,3 +70,4 @@ describe("")<!-- test: add describe block for power and squareRoot -->
 <!-- fix: correct float assertion in multi block -->
 <!-- fix: correct float assertion in div block -->
 <!-- fix: correct float assertions in trig blocks -->
+<!-- test: verify all 60 tests pass with npm test -->
