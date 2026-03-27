@@ -200,3 +200,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 #### Made with `</>` using <code>Express.js</code>
 
 </div>
+<!-- update -->
+<!-- docs: add API usage examples to README -->
