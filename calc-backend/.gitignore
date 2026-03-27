@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 *.sh
-*.ps1
+*.ps1<!-- chore: update .gitignore with env and logs -->
