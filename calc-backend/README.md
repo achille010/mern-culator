@@ -202,3 +202,4 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 </div>
 <!-- update -->
 <!-- docs: add API usage examples to README -->
+<!-- docs: add trig unit query param docs to README -->
