@@ -73,3 +73,4 @@ describe("")<!-- test: add describe block for power and squareRoot -->
 <!-- test: verify all 60 tests pass with npm test -->
 <!-- test: add edge case for div(0,0) returning NaN -->
 <!-- test: add edge case for sqrt of negative -->
+<!-- test: add edge case for log10 of negative -->
