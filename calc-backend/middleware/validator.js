@@ -1,27 +1,27 @@
 export const validateNums = (req, res, next) => {
-  let a = req.query.a ?? req.body.a ?? req.params.n;
-  let b = req.query.b ?? req.body.b;
+  let a = req.query.a ?? req.body.a ?? req.params.a ?? req.params.n;
+  let b = req.query.b ?? req.body.b ?? req.params.b;
 
-  a = Number(a);
-  b = Number(b);
+  const numA = Number(a);
+  const numB = Number(b);
 
-  if (isNaN(a) || isNaN(b)) {
-    return res.status(400).json({ error: "Invalid Numbers" });
+  if (isNaN(numA) || isNaN(numB) || a === undefined || b === undefined) {
+    return res.status(400).json({ error: "Invalid or missing numbers (a and b required)" });
   }
 
-  req.numbers = { a, b };
+  req.numbers = { a: numA, b: numB };
   next();
 };
 
 export const validateNum = (req, res, next) => {
-  let a = req.query.a ?? req.body.a ?? req.params.n;
+  let a = req.query.a ?? req.body.a ?? req.params.a ?? req.params.n;
 
-  a = Number(a);
+  const numA = Number(a);
 
-  if(isNaN(a)){
-    return res.status(400).json({error : "Invalid Input"});
+  if (isNaN(numA) || a === undefined) {
+    return res.status(400).json({ error: "Invalid or missing number (a required)" });
   }
 
-  req.numbers = { a };
+  req.numbers = { a: numA };
   next();
-}
+};
