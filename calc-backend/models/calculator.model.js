@@ -14,7 +14,10 @@ export const cosine = (a) => {
   return Math.cos(a);
 };
 export const div = (a, b) => {
-  return a / b;
+  if(b !== 0) return a / b;
+  else {
+    return "Divisors can't be zero!";
+  }
 };
 export const factorial = (a) => {
   let result = 1;
