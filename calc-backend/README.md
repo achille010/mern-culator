@@ -204,3 +204,4 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 <!-- docs: add API usage examples to README -->
 <!-- docs: add trig unit query param docs to README -->
 <!-- docs: add sumarray request body docs to README -->
+<!-- chore: final review and cleanup before push -->
