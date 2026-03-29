@@ -523,7 +523,7 @@ function App() {
       <div className="mt-8 flex items-center gap-2 text-[10px] text-[#9aa0a6] uppercase tracking-[0.2em] opacity-30 select-none">
         <span>Google Standard Replica</span>
         <span className="w-1 h-1 bg-[#5f6368] rounded-full"></span>
-        <span>Keyboard Active</span>
+        <span>Developed by Achille</span>
       </div>
     </div>
   )
