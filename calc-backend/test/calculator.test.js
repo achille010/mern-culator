@@ -1,0 +1,37 @@
+import { describe, test, expect } from "@jest/globals";
+import * as Calc from "../models/calculator.model.js";
+
+describe("add", () => {
+  test("adds two positive numbers", () => expect(Calc.add(2, 5)).toBe(7));
+  test("adds two negative numbers", () => expect(Calc.add(-2, -10)).toBe(-12));
+  test("adds floats and decimals", () =>
+    expect(Calc.add(1.123, -2.321)).toBeCloseTo(-1.198, 5));
+  test("adds zeros and wholes", () => expect(Calc.add(12345, 0)).toBe(12345));
+});
+
+describe("subtract", () => {
+  test("subtracts two positive integers", () =>
+    expect(Calc.subtract(13, 8)).toBe(5));
+  test("subtracts an integer from a negative", () =>
+    expect(Calc.subtract(-5, 3)).toBe(-8));
+  test("subtracts two negative integers", () =>
+    expect(Calc.subtract(-5, -10)).toBe(5));
+  test("subtracts positive integers from 0", () =>
+    expect(Calc.subtract(0, 12)).toBe(-12));
+  test("subtracts 0 from positive integers", () =>
+    expect(Calc.subtract(15, 0)).toBe(15));
+});
+
+describe("multiply", () => {
+  test("multiply two positive integers", () =>
+    expect(Calc.multi(4, 7)).toBe(28));
+  test("multiply two negative integers", () =>
+    expect(Calc.multi(-3, -5)).toBe(15));
+  test("multiply a positive and a negative integers", () =>
+    expect(Calc.multi(-4, 9)).toBe(-36));
+  test("multiply a positive integer by 0", () =>
+    expect(Calc.multi(12, 0)).toBe(0));
+  test("multiply two floats", () =>
+    expect(Calc.multi(2.123, 123)).toBeCloseTo(261.129, 5));
+});
+

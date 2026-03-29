@@ -30,14 +30,13 @@ import { controlAccess } from "./middleware/access.js";
 export const serverOn = (port = 3000) => {
   const app = express();
 
-  app.use("/", homeRoute);
-  app.use(express.urlencoded({ extended : true }));
-
-  app.use(express.static('views'));
-
-  app.use(express.json());
-  app.use(logger);
   app.use(controlAccess);
+  app.use(express.json());
+  app.use(express.urlencoded({ extended : true }));
+  app.use(logger);
+
+  app.use("/", homeRoute);
+  app.use(express.static('views'));
   
   app.use("/add", add);
   app.use("/subtract", subtract);
