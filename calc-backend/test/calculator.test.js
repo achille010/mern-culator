@@ -49,6 +49,10 @@ describe("division", () => {
 describe("factorial", () => {
   test("factorial of 0", () => expect(Calc.factorial(0)).toBe(1));
   test("factorial of 1", () => expect(Calc.factorial(1)).toBe(1));
-  test("factorial of a non 0 and non 1 number", () => expect(Calc.factorial(5)).toBe(120));
-  test("factorial of numbers that cause overflow", () => expect(Calc.factorial(172)).toBe('Overflow!'));
+  test("factorial of a non 0 and non 1 number", () =>
+    expect(Calc.factorial(5)).toBe(120));
+  test("factorial of numbers that cause overflow", () =>
+    expect(Calc.factorial(172)).toBe("Overflow!"));
 });
+
+describe("")
