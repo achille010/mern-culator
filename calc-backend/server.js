@@ -21,6 +21,7 @@ import arcsin from "./routes/arcsin.js";
 import arccos from "./routes/arccos.js";
 import arctan from "./routes/arctan.js";
 import ran from "./routes/ran.js";
+import rnd from "./routes/rnd.js";
 import notFound from "./routes/invalidPaths.js";
 
 import { errorHandler } from "./middleware/error.js";
@@ -57,6 +58,7 @@ export const serverOn = (port = 3000) => {
   app.use("/arccos", arccos);
   app.use("/arctan", arctan);
   app.use("/ran", ran);
+  app.use("/rnd", rnd);
   
   app.use(errorHandler);
   app.use("/", notFound);

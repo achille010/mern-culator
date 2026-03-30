@@ -34,6 +34,8 @@ calculator-api/
 │   ├── models/               # Pure math functions (zero side effects)
 │   │   └── calculator.model.js
 │   ├── routes/               # Route definitions (minimal, MVC-style)
+│   ├── test/                 # Test ground for the backend base
+│   │   └── calculator.test.js 
 │   └── middleware/           # Input validation, error handling, logging, history
 │
 ├── calc-frontend/

@@ -146,7 +146,7 @@ function App() {
 
     try {
       const response = await axios.get(`${API_BASE}/${endpoint}`, { params: { a, b } })
-      const result = response.data.result
+      const result = response.data.result ?? response.data.Result
       setDisplay(result.toString())
       setOperation(`${formatDisplay(a)} ${op} ${formatDisplay(b)} =`)
       setPreviousValue(result)
@@ -212,15 +212,15 @@ function App() {
       case 'sin': endpoint = `sin/${n}`; params = { unit }; break;
       case 'cos': endpoint = `cos/${n}`; params = { unit }; break;
       case 'tan': endpoint = `tan/${n}`; params = { unit }; break;
-      case 'n!': endpoint = `factorial`; params = { a: n, b: 0 }; break;
-      case 'sqrt': endpoint = `sqrt`; params = { a: n, b: 0 }; break;
-      case 'ln': endpoint = `ln`; params = { a: n, b: 0 }; break;
-      case 'log': endpoint = `log`; params = { a: n, b: 0 }; break;
-      case 'inv': endpoint = `inv`; params = { a: n, b: 0 }; break;
+      case 'n!': endpoint = `factorial`; params = { a: n }; break;
+      case 'sqrt': endpoint = `sqrt/${n}`; params = {}; break;
+      case 'ln': endpoint = `ln`; params = { a: n }; break;
+      case 'log': endpoint = `log`; params = { a: n }; break;
+      case 'inv': endpoint = `inv`; params = { a: n }; break;
       case 'arcsin': endpoint = `arcsin/${n}`; params = { unit }; break;
       case 'arccos': endpoint = `arccos/${n}`; params = { unit }; break;
       case 'arctan': endpoint = `arctan/${n}`; params = { unit }; break;
-      case 'rnd': endpoint = `rnd`; params = { a: n, b: 0 }; break; // Assuming rnd used like others
+      case 'rnd': endpoint = `rnd`; params = { a: n }; break; // Assuming rnd used like others
       default: return;
     }
 
@@ -273,7 +273,7 @@ function App() {
   const handleRan = useCallback(async () => {
     playClick()
     try {
-      const response = await axios.get(`${API_BASE}/ran`, { params: { a: 0, b: 0 } })
+      const response = await axios.get(`${API_BASE}/ran`)
       const result = response.data.Result || response.data.result
       setDisplay(result.toString())
       setOperation('Ran =')
@@ -314,7 +314,7 @@ function App() {
     if (nums.length === 0) return
 
     try {
-      const response = await axios.post(`${API_BASE}/sumarray`, { a: nums }, { params: { a: 0, b: 0 } }) // Dummy params to pass validator if needed
+      const response = await axios.post(`${API_BASE}/sumarray`, { a: nums })
       const result = response.data.Result || response.data.result
       setDisplay(result.toString())
       setOperation(`sum([${nums.join(', ')}]) =`)

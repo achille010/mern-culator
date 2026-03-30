@@ -5,7 +5,7 @@ const handle = (operation, fn) => (req, res, next) => {
   try {
     const result = fn(req);
     addHistory({ Operation: operation, Result: result, ...req.meta });
-    res.json({ Result: result });
+    res.json({ result: result });
   } catch (err) {
     next(err);
   }

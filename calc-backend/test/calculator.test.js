@@ -35,3 +35,14 @@ describe("multiply", () => {
     expect(Calc.multi(2.123, 123)).toBeCloseTo(261.129, 5));
 });
 
+describe("division", () => {
+  test("division of two integers where a | b", () =>
+    expect(Calc.div(6, 3)).toBe(2));
+  test("division of two integers to give definite floats", () =>
+    expect(Calc.div(5, 2)).toBe(2.5));
+  test("division of two integers to give an indefinite float", () =>
+    expect(Calc.div(22, 7)).toBeCloseTo(3.14285));
+  test("division by zero", () =>
+    expect(Calc.div(1, 0)).toBe("Divisors can't be zero!"));
+});
+
