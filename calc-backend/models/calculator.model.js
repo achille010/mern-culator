@@ -20,6 +20,9 @@ export const div = (a, b) => {
   }
 };
 export const factorial = (a) => {
+  if(a > 170){
+    return "Overflow!";
+  }
   let result = 1;
 
   if (a === 0 || a === 1) return 1;
