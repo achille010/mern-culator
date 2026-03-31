@@ -124,3 +124,21 @@ describe("log10", () => {
     expect(Calc.log10(0)).toBe("Infinity!"));
 });
 
+describe("natlog", () => {
+  test("works for small positive integers", () =>
+    expect(Calc.natLog(0.1)).toBeCloseTo(-2.30258509299));
+  test("works for e and returns 1", () => expect(Calc.natLog(Math.E)).toBe(1));
+  test("works for simple positive integers", () =>
+    expect(Calc.natLog(10)).toBeCloseTo(2.30258509299));
+  test("works for 1 and returns zero", () => expect(Calc.natLog(1)).toBe(0));
+  test("works for large positive integers", () =>
+    expect(Calc.natLog(Calc.power(10, 9))).toBeCloseTo(20.7232658369));
+});
+
+describe("sine", () => {
+  test("the sine of zero yields zero", () => expect(Calc.sine(0)).toBe(0));
+  test("the sine of PI / 2 yields one", () =>
+    expect(Calc.sine(Math.PI / 2)).toBe(1));
+  test("the sine of PI yields zero", () =>
+    expect(Calc.sine(Math.PI)).toBeCloseTo(0));
+});
