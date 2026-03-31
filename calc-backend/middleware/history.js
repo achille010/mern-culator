@@ -16,4 +16,3 @@ export const getHistory = () => {
 export const clearHistory = () => {
   history.length = 0;
 };
-<!-- chore: clean up console logs in history middleware -->

@@ -16,7 +16,7 @@ export const cosine = (a) => {
 export const div = (a, b) => {
   if(b !== 0) return a / b;
   else {
-    return "Divisors can't be zero!";
+    return "Infinity!";
   }
 };
 export const factorial = (a) => {
@@ -55,6 +55,9 @@ export const sine = (a) => {
   return Math.sin(a);
 };
 export const squareRoot = (a) => {
+  if(a < 0){
+    return "Error";
+  }
   return Math.sqrt(a);
 };
 export const subtract = (a, b) => {

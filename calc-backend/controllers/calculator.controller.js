@@ -136,10 +136,3 @@ export const tangent = handle("Tangent", (req) => {
 
   return Calc.tangent(val);
 });
-<!-- refactor: extract toRad utility in controller -->
-<!-- refactor: extract fromRad utility in controller -->
-<!-- fix: arc functions now convert output not input -->
-<!-- fix: trig functions now correctly convert input to rad -->
-<!-- fix: summarray reads from req.numbers consistently -->
-<!-- chore: mark ran() req param as unused with _req -->
-<!-- docs: add inline comments to controller handle wrapper -->
