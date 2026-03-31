@@ -79,16 +79,25 @@ describe("factorial", () => {
   test("factorial of 1", () => expect(Calc.factorial(1)).toBe(1));
   test("factorial of a non 0 and non 1 number", () =>
     expect(Calc.factorial(5)).toBe(120));
-  test("test factorial of slightly larger numbers", () => 
+  test("test factorial of slightly larger numbers", () =>
     expect(Calc.factorial(20)).toBe(2432902008176640000));
   test("factorial of numbers that cause overflow", () =>
     expect(Calc.factorial(172)).toBe("Overflow!"));
 });
 
 describe("Inverse", () => {
-  test("inverse of whole numbers (small)", () => expect(Calc.inv(3)).toBeCloseTo(0.33333333));
+  test("inverse of whole numbers (small)", () =>
+    expect(Calc.inv(3)).toBeCloseTo(0.33333333));
   test("inverse of simple fractions", () => expect(Calc.inv(0.5)).toBe(2));
   test("inverse of negatives", () => expect(Calc.inv(-5)).toBe(-0.2));
   test("inverse of 1", () => expect(Calc.inv(1)).toBe(1));
   test("inverse of zero", () => expect(Calc.inv(0)).toBe("Infinity!"));
+});
+
+describe("Round", () => {
+  test("inverse of an irrational fraction", () =>
+    expect(Calc.rnd(1 / 3)).toBe(0.333));
+  test("inverse of negative floats", () =>
+    expect(Calc.rnd(-1.5678)).toBe(-1.568));
+  test("round-up small floats", () => expect(Calc.rnd(0.0005)).toBe(0.001));
 });
