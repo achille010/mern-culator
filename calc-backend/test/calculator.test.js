@@ -97,7 +97,30 @@ describe("Inverse", () => {
 describe("Round", () => {
   test("inverse of an irrational fraction", () =>
     expect(Calc.rnd(1 / 3)).toBe(0.333));
-  test("inverse of negative floats", () =>
+  test("round off negative floats", () =>
     expect(Calc.rnd(-1.5678)).toBe(-1.568));
   test("round-up small floats", () => expect(Calc.rnd(0.0005)).toBe(0.001));
+  test("round off the mathematical PI", () =>
+    expect(Calc.rnd(Math.PI)).toBe(3.142));
 });
+
+describe("Random", () => {
+  test("Returns an integer", () =>
+    expect(Number.isInteger(Calc.ran())).toBe(true));
+  test("Returns values greater than or equal to 0", () =>
+    expect(Calc.ran()).toBeGreaterThanOrEqual(0));
+  test("Returns values less than 1000", () =>
+    expect(Calc.ran()).toBeLessThan(1000));
+});
+
+describe("log10", () => {
+  test("Operations are well handled for positive integers", () =>
+    expect(Calc.log10(2)).toBeCloseTo(0.30102999566));
+  test("The tenth logarithm for 1 returns 0", () =>
+    expect(Calc.log10(1)).toBe(0));
+  test("handles operations for negative inputs", () =>
+    expect(Calc.log10(-10)).toBe("Undefined!"));
+  test("handles operation on zero inputs", () =>
+    expect(Calc.log10(0)).toBe("Infinity!"));
+});
+

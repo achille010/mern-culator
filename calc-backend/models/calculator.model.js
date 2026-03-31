@@ -37,6 +37,11 @@ export const inv = (a) => {
   return 1 / a;
 };
 export const log10 = (a) => {
+  if(a < 0){
+    return "Undefined!";
+  } else if(a == 0){
+    return "Infinity!";
+  }
   return Math.log10(a);
 };
 export const multi = (a, b) => {

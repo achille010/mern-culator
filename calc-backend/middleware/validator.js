@@ -24,4 +24,4 @@ export const validateNum = (req, res, next) => {
 
   req.numbers = { a: numA };
   next();
-};
+};
