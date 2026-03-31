@@ -85,3 +85,10 @@ describe("factorial", () => {
     expect(Calc.factorial(172)).toBe("Overflow!"));
 });
 
+describe("Inverse", () => {
+  test("inverse of whole numbers (small)", () => expect(Calc.inv(3)).toBeCloseTo(0.33333333));
+  test("inverse of simple fractions", () => expect(Calc.inv(0.5)).toBe(2));
+  test("inverse of negatives", () => expect(Calc.inv(-5)).toBe(-0.2));
+  test("inverse of 1", () => expect(Calc.inv(1)).toBe(1));
+  test("inverse of zero", () => expect(Calc.inv(0)).toBe("Infinity!"));
+});

@@ -31,6 +31,9 @@ export const factorial = (a) => {
   return result;
 };
 export const inv = (a) => {
+  if(a == 0){
+    return "Infinity!";
+  }
   return 1 / a;
 };
 export const log10 = (a) => {
