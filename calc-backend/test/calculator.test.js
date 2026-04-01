@@ -141,9 +141,21 @@ describe("sine", () => {
     expect(Calc.sine(Math.PI / 2)).toBe(1));
   test("the sine of PI yields zero", () =>
     expect(Calc.sine(Math.PI)).toBeCloseTo(0));
-  test("the sine of -PI / 2 degrees", () => expect(Calc.sine(-1 * Math.PI / 2)).toBeCloseTo(-1));
-  test("the sine of 90 degrees after conversion", () => expect(Calc.sine(90 * Math.PI / 180)).toBeCloseTo(1));
-  test("the sine of 180 degrees after conversion", () => expect(Calc.sine(180 * Math.PI / 180)).toBeCloseTo(0));
+  test("the sine of -PI / 2 degrees", () =>
+    expect(Calc.sine((-1 * Math.PI) / 2)).toBeCloseTo(-1));
+  test("the sine of 90 degrees after conversion", () =>
+    expect(Calc.sine((90 * Math.PI) / 180)).toBeCloseTo(1));
+  test("the sine of 180 degrees after conversion", () =>
+    expect(Calc.sine((180 * Math.PI) / 180)).toBeCloseTo(0));
 });
 
-describe("")
+describe("cosine", () => {
+  test("the cosine of zero yeilds one", () =>
+    expect(Calc.cosine(0)).toBeCloseTo(1));
+  test("the cosine of PI / 2 yeilds zero", () =>
+    expect(Calc.cosine(Math.PI / 2)).toBeCloseTo(0));
+  test("the cosine of PI yields negative one", () =>
+    expect(Calc.cosine(Math.PI)).toBeCloseTo(-1));
+  test("the cosine of converted PI / 2 radians to degrees", () =>
+    expect(Calc.cosine((90 * Math.PI) / 180)).toBeCloseTo(0));
+});
