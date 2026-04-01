@@ -141,4 +141,9 @@ describe("sine", () => {
     expect(Calc.sine(Math.PI / 2)).toBe(1));
   test("the sine of PI yields zero", () =>
     expect(Calc.sine(Math.PI)).toBeCloseTo(0));
+  test("the sine of -PI / 2 degrees", () => expect(Calc.sine(-1 * Math.PI / 2)).toBeCloseTo(-1));
+  test("the sine of 90 degrees after conversion", () => expect(Calc.sine(90 * Math.PI / 180)).toBeCloseTo(1));
+  test("the sine of 180 degrees after conversion", () => expect(Calc.sine(180 * Math.PI / 180)).toBeCloseTo(0));
 });
+
+describe("")
