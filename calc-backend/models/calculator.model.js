@@ -2,9 +2,15 @@ export const add = (a, b) => {
   return a + b;
 };
 export const arccos = (a) => {
+  if(a > 1 || a < -1){
+    return "Out of range!";
+  }
   return Math.acos(a);
 };
 export const arcsin = (a) => {
+  if(a > 1 || a < -1){
+    return "Out of range!";
+  }
   return Math.asin(a);
 };
 export const arctan = (a) => {
@@ -75,5 +81,8 @@ export const sumarray = (a) => {
   return a.reduce((sum, n) => sum + n, 0);
 };
 export const tangent = (a) => {
+  if(a == Math.PI / 2){
+    return "Infinity!";
+  }
   return Math.tan(a);
 };
