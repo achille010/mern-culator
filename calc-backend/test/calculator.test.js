@@ -159,3 +159,94 @@ describe("cosine", () => {
   test("the cosine of converted PI / 2 radians to degrees", () =>
     expect(Calc.cosine((90 * Math.PI) / 180)).toBeCloseTo(0));
 });
+
+describe("tangent", () => {
+  test("the tangent of 0 yields zero as well", () =>
+    expect(Calc.tangent(0)).toBeCloseTo(0));
+  test("the tangent of 1 is approximately 0.017455", () =>
+    expect(Calc.tangent(Math.PI / 180)).toBeCloseTo(0.017455));
+  test("the tangent of fourty five degrees is one", () =>
+    expect(Calc.tangent(Math.PI / 4)).toBeCloseTo(1));
+  test("the tangent of 90 degrees is infinity", () =>
+    expect(Calc.tangent(Math.PI / 2)).toBe("Infinity!"));
+  test("tangent of a very small value", () =>
+    expect(Calc.tangent((0.003 * Math.PI) / 180)).toBeCloseTo(0.00005235987));
+  test("tangent that will yield a value close to infinity", () =>
+    expect(Calc.tangent((89.9999 * Math.PI) / 180)).toBeCloseTo(572957.795104));
+});
+
+describe("arcsine", () => {
+  test("the sine inverse of zero must return zero units", () =>
+    expect(Calc.arcsin(0)).toBeCloseTo(0));
+  test("the sine inverse of 0.5 must return 30 degrees", () =>
+    expect((Calc.arcsin(0.5) * 180) / Math.PI).toBeCloseTo(30));
+  test("the sine inverse of one must return 90 degrees", () =>
+    expect((Calc.arcsin(1) * 180) / Math.PI).toBeCloseTo(90));
+  test("the sine inverse of -1 must return -90 degrees", () =>
+    expect((Calc.arcsin(-1) * 180) / Math.PI).toBeCloseTo(-90));
+  test("The sine inverse of sqrt(2)/2 returns 45 degrees", () =>
+    expect((Calc.arcsin(Calc.squareRoot(2) / 2) * 180) / Math.PI).toBeCloseTo(
+      45,
+    ));
+  test("boundary testing for greater than 1", () =>
+    expect(Calc.arcsin(1.00001)).toBe("Out of range!"));
+  test("boundary testing for values less than -1", () =>
+    expect(Calc.arcsin(-2)).toBe("Out of range!"));
+});
+
+describe("arccos", () => {
+  test("the cosine inverse of one must return 0 units", () =>
+    expect(Calc.arccos(1)).toBeCloseTo(0));
+  test("the cosinve inverse of zero must return 90 degs", () =>
+    expect((Calc.arccos(0) * 180) / Math.PI).toBeCloseTo(90));
+  test("the cosine inverse of -1 should return 180 degs", () =>
+    expect((Calc.arccos(-1) * 180) / Math.PI).toBeCloseTo(180));
+  test("the cosine inverse of 0.5 must return 60 degs", () =>
+    expect((Calc.arccos(1 / 2) * 180) / Math.PI).toBeCloseTo(60));
+  test("the cosine inverse of -0.5 must return 120 degs", () =>
+    expect((Calc.arccos(-1 / 2) * 180) / Math.PI).toBeCloseTo(120));
+  test("the cosine inverse of sqrt(2) / 2 must return 45 degs", () =>
+    expect((Calc.arccos(Calc.squareRoot(2) / 2) * 180) / Math.PI).toBeCloseTo(
+      45,
+    ));
+  test("upper boundary testing (for values greater than 1)", () =>
+    expect(Calc.arccos(1.000001)).toBe("Out of range!"));
+  test("lower boundary testing (for values less than -1)", () =>
+    expect(Calc.arccos(-2)).toBe("Out of range!"));
+});
+
+describe("arctan", () => {
+  test("the inverse tangent function on 0 returns exactly 0", () =>
+    expect(Calc.arctan(0)).toBe(0));
+  test("the inverse tangent function of 1 returns 45 degs", () =>
+    expect((Calc.arctan(1) * 180) / Math.PI).toBeCloseTo(45));
+  test("the inverse tangent function on -1 must yield -45 degs", () =>
+    expect((Calc.arctan(-1) * 180) / Math.PI).toBeCloseTo(-45));
+  test("the inverse tangent function on sqrt(3) yields 60 deg", () =>
+    expect((Calc.arctan(Calc.squareRoot(3)) * 180) / Math.PI).toBeCloseTo(60));
+  test("the inverse tangent function on (1 / sqrt(3)) yields 30 degs", () =>
+    expect((Calc.arctan(1 / Calc.squareRoot(3)) * 180) / Math.PI).toBeCloseTo(
+      30,
+    ));
+  test("the inverse tangent fn on a very small number will return a value close to that number", () =>
+    expect(Calc.arctan(0.00001)).toBeCloseTo(0.00001));
+  test("the inverse tangent fn on a very large number will return a value close to 90 degs", () =>
+    expect((Calc.arctan(100000) * 180) / Math.PI).toBeCloseTo(90));
+  test("the inverse tangent fn on a very large negative integer returns a value close to -90 degs", () =>
+    expect((Calc.arctan(-100000) * 180) / Math.PI).toBeCloseTo(-90));
+});
+
+describe("Array sum", () => {
+  test("sum of elements of an array with all positives", () =>
+    expect(Calc.sumarray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toBe(55));
+  test("sum of elements of an empty array", () =>
+    expect(Calc.sumarray([])).toBe(0));
+  test("sum of elements of an empty array with all negatives", () => 
+    expect(Calc.sumarray([-1, -2, -3])).toBe(-6));
+  test("sum of elements of a combined array (negatives and positives)", () => 
+    expect(Calc.sumarray([1, -1, 2, -2, 10, -10, 5])).toBe(5));
+  test("sum of elements of an array with a single element", () =>
+    expect(Calc.sumarray([100])).toBe(100));
+  test("sum of very large elements", () => 
+    expect(Calc.sumarray([1234567, 2345678, 3456789])).toBe(7037034))
+});
